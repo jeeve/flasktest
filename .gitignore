@@ -1,8 +1,0 @@
-env/
-*.pyc
-__pycache__
-fbapp/static/tmp/*.jpg
-app.db
-geckodriver.log
-.cache/
-fbapp/tests/*.db
