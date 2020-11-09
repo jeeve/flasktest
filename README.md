@@ -1,5 +1,5 @@
 Projet exemple utilisé dans le cours [Concevez un site avec Flask](http://www.openclassrooms.com) pour OpenClassrooms.
-JVJ4
+JVJ5
 Chaque branche correspond à un chapitre du cours.
 
 ![Le projet final ressemble )à ceci ](https://raw.githubusercontent.com/celine-m-s/flask_test_app/master/animation.gif)
