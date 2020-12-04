@@ -11,7 +11,7 @@ from .utils import OpenGraphImage
 @app.route('/')
 @app.route('/index/')
 def index():
-    page_title = "Le test flask"
+    page_title = "Le super test flask"
     return render_template('index.html')
 
 @app.route('/result/')
