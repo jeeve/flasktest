@@ -21,4 +21,4 @@ SQLAlchemy==1.1.11
 Werkzeug==0.12.2
 wrapt==1.10.10
 numpy==1.7.0
-matplotlib==1.1.0
+
