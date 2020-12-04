@@ -20,5 +20,5 @@ six==1.10.0
 SQLAlchemy==1.1.11
 Werkzeug==0.12.2
 wrapt==1.10.10
-numpy==1.6.2
-matplotlib==1.1.1
+numpy
+matplotlib
