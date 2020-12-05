@@ -42,37 +42,16 @@ def plot_png_date(station, variable, date):
 
 @app.route('/plot/<station>/<variable>/')
 def plot_png_semaine(station, variable):
-    fig = create_figure_semaine(station, variable)
+    fig = create_figure_date(station, variable, "")
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
 
-def create_figure_semaine(station, variable):
-    df = pd.read_csv("https://statmeteo.000webhostapp.com/sensations/get-meteo.php")
-    df.columns = ['date_heure', 'station', 'vent', 'orientation', 'temperature']
-    df["date_heure"] = pd.to_datetime(df["date_heure"], format='%Y-%m-%d %H:%M')
-    df[["vent", "orientation", "temperature"]] = df[["vent", "orientation", "temperature"]].apply(pd.to_numeric)
-    
-    df_station = df[df['station'] == station]
-    is_semaine = df_station['date_heure'] > datetime.now() - timedelta(days=7)
-    df_station_semaine = df_station[is_semaine]
-    
-    fig = Figure()
-    fig.set_size_inches(10, 7, forward=True)
-    fig.suptitle(station)
-
-    axis = fig.add_subplot(1, 1, 1)
-    xs = df_station_semaine['date_heure']
-    ys = df_station_semaine[variable]
-    
-    axis.set_xlabel('date')
-    axis.set_ylabel(variable)
-    axis.scatter(xs, ys)
-
-    return fig
-
 def create_figure_date(station, variable, date):
-    df = pd.read_csv("https://statmeteo.000webhostapp.com/sensations/get-meteo.php?date=" + date)
+    if date == "":
+        df = pd.read_csv("https://statmeteo.000webhostapp.com/sensations/get-meteo.php")    
+    else:                         
+        df = pd.read_csv("https://statmeteo.000webhostapp.com/sensations/get-meteo.php?date=" + date)
     df.columns = ['date_heure', 'station', 'vent', 'orientation', 'temperature']
     df["date_heure"] = pd.to_datetime(df["date_heure"], format='%Y-%m-%d %H:%M')
     df[["vent", "orientation", "temperature"]] = df[["vent", "orientation", "temperature"]].apply(pd.to_numeric)
@@ -89,6 +68,8 @@ def create_figure_date(station, variable, date):
     
     axis.set_xlabel('date')
     axis.set_ylabel(variable)
+
+    axis.grid()
     axis.scatter(xs, ys)
 
     return fig
