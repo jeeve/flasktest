@@ -42,6 +42,7 @@ def plot_png():
 
 def create_figure():
 	fig = Figure()
+	fig.set_size_inches(10, 7, forward=True)
  #   axis = fig.add_subplot(1, 1, 1)
  #   xs = range(100)
  #   ys = [random.randint(1, 50) for x in xs]
