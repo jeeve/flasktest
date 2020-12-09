@@ -73,3 +73,14 @@ def create_figure_date(station, variable, date):
     axis.scatter(xs, ys)
 
     return fig
+    
+@app.route('/select/')
+def select():
+    return render_template(
+        'select.html',
+        data=[{'name':'red'}, {'name':'green'}, {'name':'blue'}])
+
+@app.route("/select_retour/" , methods=['GET', 'POST'])
+def select_retour():
+    select = request.form.get('comp_select')
+    return(str(select)) # just to see what select is    
