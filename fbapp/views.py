@@ -11,6 +11,10 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import numpy as np
 
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.layers.experimental import preprocessing
+
 app = Flask(__name__)
 
 # Config options - Make sure you created a 'config.py' file.
@@ -38,7 +42,7 @@ def plot_png_date(station, variable, date):
     return Response(output.getvalue(), mimetype='image/png')
 
 @app.route('/plot/<station>/<variable>/')
-def plot_png_semaine(station, variable):
+def plot_png(station, variable):
     fig = create_figure_date(station, variable, "")
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
