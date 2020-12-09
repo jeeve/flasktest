@@ -22,12 +22,9 @@ app.config.from_object('config')
 @app.route('/')
 @app.route('/index/')
 def index():
-    page_title = "Le super test flask cool"
-    return render_template('index.html', page_title = page_title)
-
-@app.route('/result/')
-def result():
-    return render_template('result.html')
+    return render_template('select.html', 
+    station=[{'name':'louviers'}, {'name':'mantes-la-jolie'}, {'name':'dreux'}, {'name':'montigny-le-bretonneux'}, {'name':'torcy'}, {'name':'montereau-fault-yonne'}, {'name':'lusigny-sur-barse'}],
+    variable=[{'name':'temperature'}, {'name':'vent'}, {'name':'orientation'}])
 
 # @app.route('/contents/<int:content_id>/')
 # def content(content_id):
@@ -74,13 +71,8 @@ def create_figure_date(station, variable, date):
 
     return fig
     
-@app.route('/select/')
-def select():
-    return render_template(
-        'select.html',
-        data=[{'name':'red'}, {'name':'green'}, {'name':'blue'}])
-
-@app.route("/select_retour/" , methods=['GET', 'POST'])
-def select_retour():
-    select = request.form.get('comp_select')
-    return(str(select)) # just to see what select is    
+@app.route('/result/', methods=['GET', 'POST'])
+def result():
+    station = request.form.get('station_select')
+    variable = request.form.get('variable_select')
+    return render_template('result.html', station=station, variable=variable)    
