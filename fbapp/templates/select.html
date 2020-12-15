@@ -1,19 +1,24 @@
-<form class="form-inline" method="POST" action="{{ url_for('result') }}">
-  <div class="form-group">
-    <div class="input-group">
-        <span class="input-group-addon">Please select</span>
-            <select name="station_select" class="selectpicker form-control">
+<form method="POST" action="{{ url_for('result') }}">
+            <select name="station_select">
               {% for o in stations %}
-              <option value="{{ o.name }}">{{ o.name }}</option>
+				{%if o == station %}
+					<option value="{{ o.name }}" selected>{{ o.name }}</option>
+				{% else %}
+					<option value="{{ o.name }}">{{ o.name }}</option>
+				{% endif %}
               {% endfor %}
             </select>
 
-            <select name="variable_select" class="selectpicker form-control">
+            <select name="variable_select">
               {% for o in variables %}
-              <option value="{{ o.name }}">{{ o.name }}</option>
+				{%if o == variable %}
+					<option value="{{ o.name }}" selected>{{ o.name }}</option>
+				{% else %}
+					<option value="{{ o.name }}">{{ o.name }}</option>
+				{% endif %}
               {% endfor %}
-            </select>			
-    </div>
-    <button type="submit" class="btn btn-default">Go</button>
-  </div>
+            </select>
+	
+  <button type="submit">Go</button>
+	
 </form>

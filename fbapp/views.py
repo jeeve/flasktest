@@ -23,17 +23,23 @@ app.config.from_object('config')
 
 stations = [{'name':'louviers'}, {'name':'mantes-la-jolie'}, {'name':'dreux'}, {'name':'montigny-le-bretonneux'}, {'name':'torcy'}, {'name':'montereau-fault-yonne'}, {'name':'lusigny-sur-barse'}]
 variables = [{'name':'temperature'}, {'name':'vent'}, {'name':'orientation'}]
+station = stations[1]
+variable = variables[0]
 
 @app.route('/')
 @app.route('/index/')
 def index():
-    return render_template('index.html', stations=stations, variables=variables)
+    return render_template('index.html', station=station, variable=variable, stations=stations, variables=variables)
     
 @app.route('/result/', methods=['GET', 'POST'])
 def result():
-    station = request.form.get('station_select')
-    variable = request.form.get('variable_select')
-    return render_template('result.html', station=station, variable=variable, stations=stations, variables=variables)   
+    s = request.form.get('station_select')
+    v = request.form.get('variable_select')
+    global station
+    global variable
+    station = s
+    variable = v
+    return render_template('result.html', station=s, variable=v, stations=stations, variables=variables)   
 
 @app.route('/plot/<station>/<variable>/<date>/')
 def plot_png_date(station, variable, date):
