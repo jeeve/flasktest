@@ -23,6 +23,7 @@ app.config.from_object('config')
 
 stations = [{'name':'louviers'}, {'name':'mantes-la-jolie'}, {'name':'dreux'}, {'name':'montigny-le-bretonneux'}, {'name':'torcy'}, {'name':'montereau-fault-yonne'}, {'name':'lusigny-sur-barse'}]
 variables = [{'name':'temperature'}, {'name':'vent'}, {'name':'orientation'}]
+
 station = stations[1]
 variable = variables[0]
 
