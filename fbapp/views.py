@@ -21,18 +21,19 @@ app = Flask(__name__)
 app.config.from_object('config')
 # To get one variable, tape app.config['MY_VARIABLE']
 
-#from .utils import OpenGraphImage
+stations = [{'name':'louviers'}, {'name':'mantes-la-jolie'}, {'name':'dreux'}, {'name':'montigny-le-bretonneux'}, {'name':'torcy'}, {'name':'montereau-fault-yonne'}, {'name':'lusigny-sur-barse'}]
+variables = [{'name':'temperature'}, {'name':'vent'}, {'name':'orientation'}]
 
 @app.route('/')
 @app.route('/index/')
 def index():
-    return render_template('select.html', 
-    station=[{'name':'louviers'}, {'name':'mantes-la-jolie'}, {'name':'dreux'}, {'name':'montigny-le-bretonneux'}, {'name':'torcy'}, {'name':'montereau-fault-yonne'}, {'name':'lusigny-sur-barse'}],
-    variable=[{'name':'temperature'}, {'name':'vent'}, {'name':'orientation'}])
-
-# @app.route('/contents/<int:content_id>/')
-# def content(content_id):
-#     return '%s' % content_id
+    return render_template('index.html', stations=stations, variables=variables)
+    
+@app.route('/result/', methods=['GET', 'POST'])
+def result():
+    station = request.form.get('station_select')
+    variable = request.form.get('variable_select')
+    return render_template('result.html', station=station, variable=variable, stations=stations, variables=variables)   
 
 @app.route('/plot/<station>/<variable>/<date>/')
 def plot_png_date(station, variable, date):
@@ -73,10 +74,4 @@ def create_figure_date(station, variable, date):
     axis.grid()
     axis.scatter(xs, ys)
 
-    return fig
-    
-@app.route('/result/', methods=['GET', 'POST'])
-def result():
-    station = request.form.get('station_select')
-    variable = request.form.get('variable_select')
-    return render_template('result.html', station=station, variable=variable)    
+    return fig 
