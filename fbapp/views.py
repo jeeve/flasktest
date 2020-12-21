@@ -9,6 +9,7 @@ from matplotlib.figure import Figure
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
+import matplotlib.dates as mdates
 import numpy as np
 
 import tensorflow as tf
@@ -79,6 +80,11 @@ def create_figure_date(station, variable, date):
     axis.set_ylabel(variable)
 
     axis.grid()
+    
+    if len(date) == 8:
+        xfmt = mdates.DateFormatter("%H:%M")
+        axis.xaxis.set_major_formatter(xfmt)
+    
     axis.plot(xs, ys)
 
     return fig 
