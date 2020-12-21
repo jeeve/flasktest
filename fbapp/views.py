@@ -79,6 +79,6 @@ def create_figure_date(station, variable, date):
     axis.set_ylabel(variable)
 
     axis.grid()
-    axis.scatter(xs, ys)
+    axis.plot(xs, ys)
 
     return fig 
