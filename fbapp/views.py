@@ -82,6 +82,7 @@ def create_figure_date(station, variable, date):
     axis.grid()
     
     if len(date) == 8:
+        axis.set_xlabel(date[6:8] + '/' + date[4:6] + '/' + date[0:4])
         xfmt = mdates.DateFormatter("%H:%M")
         axis.xaxis.set_major_formatter(xfmt)
     
