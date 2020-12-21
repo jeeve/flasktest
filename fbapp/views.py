@@ -13,10 +13,6 @@ import matplotlib.dates as mdates
 import numpy as np
 from windrose import WindroseAxes
 
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras.layers.experimental import preprocessing
-
 app = Flask(__name__)
 
 # Config options - Make sure you created a 'config.py' file.

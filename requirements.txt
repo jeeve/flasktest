@@ -23,5 +23,4 @@ wrapt==1.10.10
 numpy
 matplotlib
 pandas
-tensorflow
 windrose
