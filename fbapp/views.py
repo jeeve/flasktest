@@ -93,7 +93,7 @@ def create_niveau():
     axis.set_xlabel('date')
     axis.set_ylabel('hauteur')
     
-    axis.set_xlim([datetime.date.today() + relativedelta(months=-12), datetime.date.today()])
+    axis.set_xlim([datetime.date.today() + relativedelta(months=-12), datetime.date.today() + relativedelta(days=10)])
 
     axis.grid()
    
