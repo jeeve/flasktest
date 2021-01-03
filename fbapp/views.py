@@ -68,6 +68,41 @@ def rose_png(station):
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
 
+@app.route('/niveau/')
+def niveau_png():
+    fig = create_niveau()
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    return Response(output.getvalue(), mimetype='image/png')
+
+def create_niveau():
+    df = pd.read_csv("https://statmeteo.000webhostapp.com/sensations/get-niveau.php")    
+    df.columns = ['date_heure', 'station', 'hauteur']
+    df["date_heure"] = pd.to_datetime(df["date_heure"], format='%Y-%m-%d %H:%M')
+    df[["hauteur"]] = df[["vent", "orientation", "temperature"]].apply(pd.to_numeric)
+      
+    fig = Figure()
+    fig.set_size_inches(10, 7, forward=True)
+    fig.suptitle(station)
+
+    axis = fig.add_subplot(1, 1, 1)
+    xs = df_station['date_heure']
+    ys = df_station['hauteur']
+    
+    axis.set_xlabel('date')
+    axis.set_ylabel('hauteur')
+
+    axis.grid()
+"""    
+    if len(date) == 8:
+        axis.set_xlabel(date[6:8] + '/' + date[4:6] + '/' + date[0:4])
+        xfmt = mdates.DateFormatter("%H:%M")
+        axis.xaxis.set_major_formatter(xfmt)
+"""    
+    axis.plot(xs, ys)
+
+    return fig 
+
 def create_plot_date(station, variable, date):
     if date == "":
         df = pd.read_csv("https://statmeteo.000webhostapp.com/sensations/get-meteo.php")    
