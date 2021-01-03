@@ -79,7 +79,7 @@ def create_niveau():
     df = pd.read_csv("https://statmeteo.000webhostapp.com/sensations/get-niveau.php")    
     df.columns = ['date_heure', 'station', 'hauteur']
     df["date_heure"] = pd.to_datetime(df["date_heure"], format='%Y-%m-%d %H:%M')
-    df[["hauteur"]] = df[["vent", "orientation", "temperature"]].apply(pd.to_numeric)
+    df[["hauteur"]] = df[["hauteur"]].apply(pd.to_numeric)
       
     fig = Figure()
     fig.set_size_inches(10, 7, forward=True)
