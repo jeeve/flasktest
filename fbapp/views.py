@@ -94,9 +94,17 @@ def create_niveau():
     axis.set_ylabel('hauteur')
     
     axis.set_xlim([datetime.date.today() + relativedelta(months=-12), datetime.date.today() + relativedelta(days=10)])
-
+    axis.set_ylim(0, 100)
     axis.grid()
    
+    axis.xaxis.set_major_locator(mdates.MonthLocator())
+    axis.xaxis.set_major_formatter(mdates.DateFormatter('%m/%Y'))
+    axis.xaxis.set_minor_locator(mdates.DayLocator())
+ 
+    
+    for label in axis.xaxis.get_ticklabels():
+        label.set_rotation(45)
+    
     axis.plot(xs, ys)
 
     return fig 
