@@ -8,7 +8,8 @@ from matplotlib.figure import Figure
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from datetime import datetime, timedelta
+import datetime
+from dateutil.relativedelta import relativedelta
 import matplotlib.dates as mdates
 import numpy as np
 from windrose import WindroseAxes
@@ -83,7 +84,7 @@ def create_niveau():
       
     fig = Figure()
     fig.set_size_inches(10, 7, forward=True)
-    fig.suptitle('foret-orient')
+    fig.suptitle('niveau')
 
     axis = fig.add_subplot(1, 1, 1)
     xs = df['date_heure']
@@ -91,6 +92,8 @@ def create_niveau():
     
     axis.set_xlabel('date')
     axis.set_ylabel('hauteur')
+    
+    axis.set_xlim([datetime.date.today() + relativedelta(months=-12), datetime.date.today()])
 
     axis.grid()
    
