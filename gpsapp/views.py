@@ -29,11 +29,11 @@ filename = ''
 file_url = ''
 message = ''
 
-@app.route('/gps/')
+@app.route('/')
 def upload_form():
     return render_template('upload.html', message=message)
     
-@app.route('/gps/', methods=['POST'])
+@app.route('/', methods=['POST'])
 def upload_file():
     global message
     if request.method == 'POST':
@@ -61,12 +61,12 @@ def upload_file():
             message = 'Allowed file type is sml'
             return redirect(request.url)    
         
-@app.route('/gps/gpx/')
+@app.route('/gpx/')
 def gpx_form():
     global filename
     return render_template('gpx.html', message=message, file_url="/download/" + filename, filename=filename)        
         
-@app.route('/gps//download/<path:filename>')
+@app.route('/download/<path:filename>')
 def download(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True) 
         
