@@ -128,6 +128,8 @@ def create_plot_date(station, variable, date):
     
     axis.set_xlabel('date')
     axis.set_ylabel(variable)
+    if variable == "vent":
+        axis.set_ylabel("vent (kts)")
 
     axis.grid()
     
