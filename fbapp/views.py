@@ -90,7 +90,7 @@ def create_niveau():
     xs = df['date_heure']
     ys = df['hauteur']
     
-    axis.set_ylabel('hauteur')
+    axis.set_ylabel('hauteur (%)')
     
     axis.set_xlim([datetime.date.today() + relativedelta(months=-12), datetime.date.today() + relativedelta(days=10)])
     axis.set_ylim(0, 100)
