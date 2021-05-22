@@ -41,6 +41,10 @@ def result():
     variable = v
     return render_template('result.html', station=s, variable=v, stations=stations, variables=variables)   
 
+@app.route('/plot/<station>/<date>/')
+def plot_rose_png_date(station, date):
+    return render_template('plot.html', station=station, date=date)   
+
 @app.route('/plot/<station>/<variable>/<date>/')
 def plot_png_date(station, variable, date):
     fig = create_plot_date(station, variable, date)
@@ -129,7 +133,9 @@ def create_plot_date(station, variable, date):
     axis.set_xlabel('date')
     axis.set_ylabel(variable)
     if variable == "vent":
-        axis.set_ylabel("vent (kts)")
+        axis.set_ylabel("Vent (kts)")
+    if variable == "temperature":
+        axis.set_ylabel("Température (°C)")        
 
     axis.grid()
     
