@@ -85,6 +85,8 @@ def create_niveau():
     df.columns = ['date_heure', 'station', 'hauteur']
     df["date_heure"] = pd.to_datetime(df["date_heure"], format='%Y-%m-%d %H:%M')
     df[["hauteur"]] = df[["hauteur"]].apply(pd.to_numeric)
+    
+    df.drop(df.loc[df['hauteur']==0].index, inplace=True)
       
     fig = Figure()
     fig.set_size_inches(10, 7, forward=True)
